@@ -15,17 +15,27 @@ namespace GloboTicket.Promotion.Venues
             this.repository = repository;
         }
 
-        public async Task SaveVenue(VenueInfo venueModel)
+        public async Task SaveVenue(VenueInfo venueInfo)
         {
-            var venue = await repository.GetOrInsertVenue(venueModel.VenueGuid);
-            await repository.AddAsync(new VenueDescription
+            var venue = await repository.GetOrInsertVenue(venueInfo.VenueGuid);
+            var lastVenueDescription = venue.Descriptions
+                .OrderByDescending(description => description.ModifiedDate)
+                .FirstOrDefault();
+
+            if (lastVenueDescription == null ||
+                lastVenueDescription.Name != venueInfo.Name ||
+                lastVenueDescription.City != venueInfo.City)
             {
-                ModifiedDate = DateTime.UtcNow,
-                Venue = venue,
-                Name = venueModel.Name,
-                City = venueModel.City
-            });
-            await repository.SaveChangesAsync();
+                await repository.AddAsync(new VenueDescription
+                {
+                    ModifiedDate = DateTime.UtcNow,
+                    Venue = venue,
+                    Name = venueInfo.Name,
+                    City = venueInfo.City
+                });
+                await repository.SaveChangesAsync();
+            }
+
         }
 
         public async Task DeleteVenue(Guid venueGuid)
