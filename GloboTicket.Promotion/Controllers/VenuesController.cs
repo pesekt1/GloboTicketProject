@@ -60,6 +60,7 @@ namespace GloboTicket.Promotion.Controllers
             {
                 _context.Add(venue);
                 await _context.SaveChangesAsync();
+                await Task.Delay(3000);
                 return RedirectToAction(nameof(Index));
             }
             return View(venue);
