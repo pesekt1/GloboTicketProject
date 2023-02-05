@@ -2,7 +2,7 @@
 
 not idempotent POST venue
 
-simulate an error in the response to simulate the problem with idempotence of POST request:
+simulate an error in the response to simulate the problem with idempotence of POST request (we put a delay between the save and the response):
 VenuesController:
 ```
         [HttpPost]
