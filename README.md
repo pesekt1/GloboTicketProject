@@ -1,2 +1,1 @@
 #GloboTicket
-Initial state
