@@ -25,8 +25,8 @@ namespace GloboTicket.Promotion.Controllers
             return View(await _context.Venue.ToListAsync());
         }
 
-        // GET: Venues/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Venues/Details/abc-123
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -34,7 +34,7 @@ namespace GloboTicket.Promotion.Controllers
             }
 
             var venue = await _context.Venue
-                .FirstOrDefaultAsync(m => m.VenueId == id);
+                .SingleOrDefaultAsync(m => m.VenueGuid == id);
             if (venue == null)
             {
                 return NotFound();
@@ -44,8 +44,13 @@ namespace GloboTicket.Promotion.Controllers
         }
 
         // GET: Venues/Create
-        public IActionResult Create()
+        // GET: Venues/Create/abc-123
+        public IActionResult Create(Guid? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Create), new { id = Guid.NewGuid() });
+            }
             return View();
         }
 
@@ -54,11 +59,25 @@ namespace GloboTicket.Promotion.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VenueId,Name,City")] Venue venue)
+        public async Task<IActionResult> Create(Guid id, [Bind("VenueId,Name,City")] Venue venue)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(venue);
+                venue.VenueGuid = id;
+                var venueId = await _context.Venue
+                    .Where(m => m.VenueGuid == id)
+                    .Select(m => m.VenueId)
+                    .SingleOrDefaultAsync();
+                if (venueId == 0)
+                {
+                    _context.Add(venue);
+                }
+                else
+                {
+                    venue.VenueId = venueId;
+                    _context.Update(venue);
+                }
+
                 await _context.SaveChangesAsync();
                 await Task.Delay(3000);
                 return RedirectToAction(nameof(Index));
@@ -66,15 +85,16 @@ namespace GloboTicket.Promotion.Controllers
             return View(venue);
         }
 
-        // GET: Venues/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Venues/Edit/abc-123
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var venue = await _context.Venue.FindAsync(id);
+            var venue = await _context.Venue.
+                SingleOrDefaultAsync(m => m.VenueGuid == id);
             if (venue == null)
             {
                 return NotFound();
@@ -82,43 +102,38 @@ namespace GloboTicket.Promotion.Controllers
             return View(venue);
         }
 
-        // POST: Venues/Edit/5
+        // POST: Venues/Edit/abc-123
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VenueId,Name,City")] Venue venue)
+        public async Task<IActionResult> Edit(Guid id, [Bind("VenueId,Name,City")] Venue venue)
         {
-            if (id != venue.VenueId)
-            {
-                return NotFound();
-            }
+            venue.VenueGuid = id;
 
             if (ModelState.IsValid)
             {
-                try
+                var venueId = await _context.Venue
+                    .Where(m => m.VenueGuid == id)
+                    .Select(m => m.VenueId)
+                    .SingleOrDefaultAsync();
+                if (venueId == 0)
                 {
+                    return NotFound();
+                }
+                else
+                {
+                    venue.VenueId = venueId;
                     _context.Update(venue);
-                    await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!VenueExists(venue.VenueId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(venue);
         }
 
-        // GET: Venues/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Venues/Delete/abc-123
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -126,7 +141,7 @@ namespace GloboTicket.Promotion.Controllers
             }
 
             var venue = await _context.Venue
-                .FirstOrDefaultAsync(m => m.VenueId == id);
+                .SingleOrDefaultAsync(m => m.VenueGuid == id);
             if (venue == null)
             {
                 return NotFound();
@@ -135,12 +150,13 @@ namespace GloboTicket.Promotion.Controllers
             return View(venue);
         }
 
-        // POST: Venues/Delete/5
+        // POST: Venues/Delete/abc-123
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var venue = await _context.Venue.FindAsync(id);
+            var venue = await _context.Venue
+                .SingleOrDefaultAsync(m => m.VenueGuid == id);
             _context.Venue.Remove(venue);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
