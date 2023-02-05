@@ -26,6 +26,13 @@ namespace GloboTicket.Promotion.Venues
                 lastVenueDescription.Name != venueInfo.Name ||
                 lastVenueDescription.City != venueInfo.City)
             {
+
+                var modifiedTicks = lastVenueDescription?.ModifiedDate.Ticks ?? 0;
+                if (modifiedTicks != venueInfo.LastModifiedTicks)
+                {
+                    throw new DbUpdateConcurrencyException("A new update has occurred since you loaded the page. Please refresh and try again.");
+                }
+
                 await repository.AddAsync(new VenueDescription
                 {
                     ModifiedDate = DateTime.UtcNow,
