@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GloboTicket.Promotion.Data;
+using GloboTicket.Promotion.Venues;
 
 namespace GloboTicket.Promotion
 {
@@ -29,6 +30,9 @@ namespace GloboTicket.Promotion
 
             services.AddDbContext<PromotionContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PromotionContext")));
+
+            services.AddScoped<VenueQueries>();
+            services.AddScoped<VenueCommands>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
