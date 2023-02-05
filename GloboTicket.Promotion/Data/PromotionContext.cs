@@ -15,5 +15,16 @@ namespace GloboTicket.Promotion.Data
         }
 
         public DbSet<GloboTicket.Promotion.Venues.Venue> Venue { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //configuring VenueGuid property
+            modelBuilder.Entity<Venue>()
+                .HasAlternateKey(v => new { v.VenueGuid });
+            //autogenerating the guid for the existing records
+            modelBuilder.Entity<Venue>().Property(v => v.VenueGuid)
+           .HasDefaultValueSql("NEWID()");
+        }
+
     }
 }
