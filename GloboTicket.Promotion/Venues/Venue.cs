@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GloboTicket.Promotion.Venues
 {
     public class Venue
     {
         public int VenueId { get; set; }
+        [Required]
+        public Guid VenueGuid { get; set; }
 
         [MaxLength(50)]
         [Required]
