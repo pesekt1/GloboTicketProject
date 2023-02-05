@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GloboTicket.Promotion.Venues;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using GloboTicket.Promotion.Venues;
 
 namespace GloboTicket.Promotion.Data
 {
@@ -18,13 +17,26 @@ namespace GloboTicket.Promotion.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //configuring VenueGuid property
             modelBuilder.Entity<Venue>()
                 .HasAlternateKey(v => new { v.VenueGuid });
-            //autogenerating the guid for the existing records
-            //modelBuilder.Entity<Venue>().Property(v => v.VenueGuid)
-           //.HasDefaultValueSql("NEWID()");
         }
 
+        public async Task<Venue> GetOrInsertVenue(Guid venueGuid)
+        {
+            var venue = Venue
+                .Include(venue => venue.Descriptions)
+                .Where(venue => venue.VenueGuid == venueGuid)
+                .SingleOrDefault();
+            if (venue == null)
+            {
+                venue = new Venue
+                {
+                    VenueGuid = venueGuid
+                };
+                await AddAsync(venue);
+            }
+
+            return venue;
+        }
     }
 }
