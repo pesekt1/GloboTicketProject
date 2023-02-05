@@ -22,8 +22,8 @@ namespace GloboTicket.Promotion.Data
             modelBuilder.Entity<Venue>()
                 .HasAlternateKey(v => new { v.VenueGuid });
             //autogenerating the guid for the existing records
-            modelBuilder.Entity<Venue>().Property(v => v.VenueGuid)
-           .HasDefaultValueSql("NEWID()");
+            //modelBuilder.Entity<Venue>().Property(v => v.VenueGuid)
+           //.HasDefaultValueSql("NEWID()");
         }
 
     }
