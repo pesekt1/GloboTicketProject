@@ -2,4 +2,4 @@
 
 migrating the database
 
-![Immutable database](immutable.png)
+![Migration](migration.png)
