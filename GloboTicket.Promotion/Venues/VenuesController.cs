@@ -80,7 +80,7 @@ namespace GloboTicket.Promotion.Venues
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("VenueId,Name,City")] VenueInfo venue)
+        public async Task<IActionResult> Edit(Guid id, [Bind("VenueGuid,Name,City,LastModifiedTicks")] VenueInfo venue)
         {
             if (ModelState.IsValid)
             {
