@@ -1,16 +1,14 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GloboTicket.Promotion.Data;
 using GloboTicket.Promotion.Venues;
+using GloboTicket.Promotion.Acts;
+using GloboTicket.Promotion.Shows;
+using GloboTicket.Promotion.Contents;
 
 namespace GloboTicket.Promotion
 {
@@ -33,6 +31,12 @@ namespace GloboTicket.Promotion
 
             services.AddScoped<VenueQueries>();
             services.AddScoped<VenueCommands>();
+            services.AddScoped<ActQueries>();
+            services.AddScoped<ActCommands>();
+            services.AddScoped<ShowQueries>();
+            services.AddScoped<ShowCommands>();
+            services.AddScoped<ContentQueries>();
+            services.AddScoped<ContentCommands>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

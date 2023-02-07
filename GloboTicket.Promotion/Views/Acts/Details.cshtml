@@ -1,0 +1,31 @@
+﻿@model GloboTicket.Promotion.Acts.ActInfo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ActInfo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <div class="col-4">
+            @if (Model.ImageHash != null)
+            {
+                <img class="act-image" src="@Url.Content($"~/Content/{Uri.EscapeDataString(Model.ImageHash)}")" alt="@Model.Title">
+            }
+        </div>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ActGuid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
