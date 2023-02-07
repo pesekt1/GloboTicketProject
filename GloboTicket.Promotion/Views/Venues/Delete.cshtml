@@ -1,4 +1,4 @@
-﻿@model GloboTicket.Promotion.Venues.Venue
+﻿@model GloboTicket.Promotion.Venues.VenueInfo
 
 @{
     ViewData["Title"] = "Delete";
@@ -26,7 +26,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="VenueId" />
+        <input type="hidden" asp-for="VenueGuid" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
