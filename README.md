@@ -5,9 +5,13 @@ Original state:
 Venue table
 
 ### 1.Step: Add immutable records:
+- Generate AddImmutableRecords migration based on the entity classes we added VenueDescription and VenueRemoved.
+- Update the local database.
 ![Adding Immutable Records](addingImmutableRecords.png)
 
 ### 2.Step: Creating a migration script
+
+Create MigrateVenueToImmutableRecords migration - we need to write the scripts for the Up and Down methods:
 
 ```C#
     public partial class MigrateVenueToImmutableRecords : Migration
@@ -43,6 +47,14 @@ Venue table
 }
 ```
 
-### 3.Step: Apply the changes on the database - remove the state from Venue table:
+- Up method: Insert existing data from Venue into VenueDescription.
+- Down method: We need to find the last description records and set Name and City properties in Venue table. There might be multiple rows in VenueDescription corresponding to a single venue (if it was updated) - we need the most recent record. 
+
+### 3.Step: Remove the state from Venue table:
+- Remove City and Name properties from Venue entity class.
+- Generate a migration for this
+- Apply the migration to your local databse.
 
 ![Immutable](immutable.png)
+
+Now our database is in immutable form and we migrated the existing data as well.
