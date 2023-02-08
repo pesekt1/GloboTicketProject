@@ -1,22 +1,27 @@
-#GloboTicket
+# GloboTicket
 
+## Implementing Idempotent POST request
 implementing client-side ID to achieve idempotent POST request.
 
-add guid to Venue
+1. step:
+- add guid to Venue
+- override OnModelCreating
+- create a migration
+- update the database
 
-override OnModelCreating
+2. step:
+- remove default value generation from onModelCreating
+- create a migration 
+- update the database
 
-create a migration
-update the database
+3. step:
+- Change the VenuesController actions to use guid
 
-remove default value generation from onModelCreating
-
-create a migration 
-update the database
-
-Change the VenuesController actions to use guid
-
-Test that the POST request is now idempotent:
+## Test the POST request idempotence:
 
 Now we can test that if we click on Create button multiple times, we only get one record.
 If we click on the Create button and then edit something and click on Create again it will update the record that was just created - it will not create a new record.
+
+## Database state:
+
+![Venue Table2](venueTable2.png)
