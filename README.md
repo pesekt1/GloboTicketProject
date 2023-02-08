@@ -1,7 +1,9 @@
-#GloboTicket
+# GloboTicket
 
-TDD - test-driven development
+## TDD - test-driven development
 
-All failing tests from the previous branch fixed
+Fix all the failing tests
 
-Now we are ready to migrate the database
+![Tests Fixed](testsFixed.png)
+
+Now we are ready to finally migrate the database to the immutable architecture.
