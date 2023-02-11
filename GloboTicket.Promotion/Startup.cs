@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using GloboTicket.Promotion.Acts;
+using GloboTicket.Promotion.Contents;
+using GloboTicket.Promotion.Data;
+using GloboTicket.Promotion.Shows;
+using GloboTicket.Promotion.Venues;
+using MassTransit;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using GloboTicket.Promotion.Data;
-using GloboTicket.Promotion.Venues;
-using GloboTicket.Promotion.Acts;
-using GloboTicket.Promotion.Shows;
-using GloboTicket.Promotion.Contents;
 
 namespace GloboTicket.Promotion
 {
@@ -29,6 +30,15 @@ namespace GloboTicket.Promotion
             services.AddDbContext<PromotionContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PromotionContext")));
 
+            services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq();
+            });
+
+            //services.AddMassTransitHostedService();
+
+            services.AddScoped<Dispatcher>();
+
             services.AddScoped<VenueQueries>();
             services.AddScoped<VenueCommands>();
             services.AddScoped<ActQueries>();
@@ -37,6 +47,8 @@ namespace GloboTicket.Promotion
             services.AddScoped<ShowCommands>();
             services.AddScoped<ContentQueries>();
             services.AddScoped<ContentCommands>();
+
+            services.AddScoped<INotifier<Show>, ShowNotifier>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

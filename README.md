@@ -9,4 +9,6 @@ System Architecture:
 
 Present state of the MSSQL database:
 
-![Acts And Shows](actsAndShows.png)
+
+![E R D Venue Location Time Zone](ERD_venueLocation_TimeZone.png)
+

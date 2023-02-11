@@ -10,23 +10,23 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GloboTicket.Promotion.Migrations
 {
     [DbContext(typeof(PromotionContext))]
-    [Migration("20230207221226_AddActsShowsAndContents")]
+    [Migration("20201124022110_AddActsShowsAndContents")]
     partial class AddActsShowsAndContents
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("GloboTicket.Promotion.Acts.Act", b =>
                 {
                     b.Property<int>("ActId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<Guid>("ActGuid")
                         .HasColumnType("uniqueidentifier");
@@ -43,7 +43,7 @@ namespace GloboTicket.Promotion.Migrations
                     b.Property<int>("ActDescriptionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("ActId")
                         .HasColumnType("int");
@@ -72,7 +72,7 @@ namespace GloboTicket.Promotion.Migrations
                     b.Property<int>("ActRemovedId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("ActId")
                         .HasColumnType("int");
@@ -112,7 +112,7 @@ namespace GloboTicket.Promotion.Migrations
                     b.Property<int>("ShowId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("ActId")
                         .HasColumnType("int");
@@ -137,7 +137,7 @@ namespace GloboTicket.Promotion.Migrations
                     b.Property<int>("ShowCancelledId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CancelledDate")
                         .HasColumnType("datetime2");
@@ -157,7 +157,7 @@ namespace GloboTicket.Promotion.Migrations
                     b.Property<int>("VenueId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<Guid>("VenueGuid")
                         .HasColumnType("uniqueidentifier");
@@ -174,7 +174,7 @@ namespace GloboTicket.Promotion.Migrations
                     b.Property<int>("VenueDescriptionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -204,7 +204,7 @@ namespace GloboTicket.Promotion.Migrations
                     b.Property<int>("VenueRemovedId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("RemovedDate")
                         .HasColumnType("datetime2");

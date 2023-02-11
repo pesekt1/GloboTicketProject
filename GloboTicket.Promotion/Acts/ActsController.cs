@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using GloboTicket.Promotion.Contents;
+using GloboTicket.Promotion.Shows;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GloboTicket.Promotion.Acts
@@ -11,12 +12,14 @@ namespace GloboTicket.Promotion.Acts
         private readonly ActCommands actCommands;
         private readonly ActQueries actQueries;
         private readonly ContentCommands contentCommands;
+        private readonly ShowQueries showQueries;
 
-        public ActsController(ActCommands actCommands, ActQueries actQueries, ContentCommands contentCommands)
+        public ActsController(ActCommands actCommands, ActQueries actQueries, ContentCommands contentCommands, ShowQueries showQueries)
         {
             this.actCommands = actCommands;
             this.actQueries = actQueries;
             this.contentCommands = contentCommands;
+            this.showQueries = showQueries;
         }
 
         // GET: Acts
@@ -34,7 +37,14 @@ namespace GloboTicket.Promotion.Acts
                 return NotFound();
             }
 
-            return View(act);
+            var shows = await showQueries.ListShows(id);
+            var viewModel = new ActViewModel
+            {
+                Act = act,
+                Shows = shows
+            };
+
+            return View(viewModel);
         }
 
         // GET: Acts/Create

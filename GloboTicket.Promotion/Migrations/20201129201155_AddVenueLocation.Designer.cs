@@ -4,14 +4,16 @@ using GloboTicket.Promotion.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GloboTicket.Promotion.Migrations
 {
     [DbContext(typeof(PromotionContext))]
-    partial class PromotionContextModelSnapshot : ModelSnapshot
+    [Migration("20201129201155_AddVenueLocation")]
+    partial class AddVenueLocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,7 +194,7 @@ namespace GloboTicket.Promotion.Migrations
 
                     b.HasKey("VenueDescriptionId");
 
-                    b.HasAlternateKey("VenueId", "ModifiedDate");
+                    b.HasIndex("VenueId");
 
                     b.ToTable("VenueDescription");
                 });
@@ -218,7 +220,7 @@ namespace GloboTicket.Promotion.Migrations
 
                     b.HasKey("VenueLocationId");
 
-                    b.HasAlternateKey("VenueId", "ModifiedDate");
+                    b.HasIndex("VenueId");
 
                     b.ToTable("VenueLocation");
                 });
@@ -241,31 +243,6 @@ namespace GloboTicket.Promotion.Migrations
                     b.HasIndex("VenueId");
 
                     b.ToTable("VenueRemoved");
-                });
-
-            modelBuilder.Entity("GloboTicket.Promotion.Venues.VenueTimeZone", b =>
-                {
-                    b.Property<int>("VenueTimeZoneId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TimeZone")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("VenueId")
-                        .HasColumnType("int");
-
-                    b.HasKey("VenueTimeZoneId");
-
-                    b.HasAlternateKey("VenueId", "ModifiedDate");
-
-                    b.ToTable("VenueTimeZone");
                 });
 
             modelBuilder.Entity("GloboTicket.Promotion.Acts.ActDescription", b =>
@@ -353,17 +330,6 @@ namespace GloboTicket.Promotion.Migrations
                     b.Navigation("Venue");
                 });
 
-            modelBuilder.Entity("GloboTicket.Promotion.Venues.VenueTimeZone", b =>
-                {
-                    b.HasOne("GloboTicket.Promotion.Venues.Venue", "Venue")
-                        .WithMany("TimeZones")
-                        .HasForeignKey("VenueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Venue");
-                });
-
             modelBuilder.Entity("GloboTicket.Promotion.Acts.Act", b =>
                 {
                     b.Navigation("Descriptions");
@@ -383,8 +349,6 @@ namespace GloboTicket.Promotion.Migrations
                     b.Navigation("Locations");
 
                     b.Navigation("Removed");
-
-                    b.Navigation("TimeZones");
                 });
 #pragma warning restore 612, 618
         }

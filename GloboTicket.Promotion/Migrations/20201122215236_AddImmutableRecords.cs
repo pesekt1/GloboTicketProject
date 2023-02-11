@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GloboTicket.Promotion.Migrations
 {
-    public partial class addImmutableRecords : Migration
+    public partial class AddImmutableRecords : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

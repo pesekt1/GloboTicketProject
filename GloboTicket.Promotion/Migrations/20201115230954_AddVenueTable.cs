@@ -2,7 +2,7 @@
 
 namespace GloboTicket.Promotion.Migrations
 {
-    public partial class VenueTable : Migration
+    public partial class AddVenueTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,4 +1,4 @@
-﻿@model GloboTicket.Promotion.Venues.VenueInfo
+﻿@model GloboTicket.Promotion.Venues.VenueViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,18 +12,36 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="VenueGuid" />
-            <input type="hidden" asp-for="LastModifiedTicks" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Venue.Name" class="control-label"></label>
+                <input asp-for="Venue.Name" class="form-control" />
+                <span asp-validation-for="Venue.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
+                <label asp-for="Venue.City" class="control-label"></label>
+                <input asp-for="Venue.City" class="form-control" />
+                <span asp-validation-for="Venue.City" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Venue.TimeZone" class="control-label"></label>
+                <select asp-for="Venue.TimeZone" asp-items="@Model.TimeZones" class="form-control">
+                    <option value="">Select Time Zone</option>
+                </select>
+                <span asp-validation-for="Venue.TimeZone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venue.Latitude" class="control-label"></label>
+                <input asp-for="Venue.Latitude" class="form-control" />
+                <span asp-validation-for="Venue.Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venue.Longitude" class="control-label"></label>
+                <input asp-for="Venue.Longitude" class="form-control" />
+                <span asp-validation-for="Venue.Longitude" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Venue.LastModifiedTicks" />
+            <input type="hidden" asp-for="Venue.LocationLastModifiedTicks" />
+            <input type="hidden" asp-for="Venue.TimeZoneLastModifiedTicks" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

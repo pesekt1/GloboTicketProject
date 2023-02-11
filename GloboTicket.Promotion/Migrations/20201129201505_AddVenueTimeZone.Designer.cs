@@ -4,14 +4,16 @@ using GloboTicket.Promotion.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GloboTicket.Promotion.Migrations
 {
     [DbContext(typeof(PromotionContext))]
-    partial class PromotionContextModelSnapshot : ModelSnapshot
+    [Migration("20201129201505_AddVenueTimeZone")]
+    partial class AddVenueTimeZone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,7 +194,7 @@ namespace GloboTicket.Promotion.Migrations
 
                     b.HasKey("VenueDescriptionId");
 
-                    b.HasAlternateKey("VenueId", "ModifiedDate");
+                    b.HasIndex("VenueId");
 
                     b.ToTable("VenueDescription");
                 });
@@ -218,7 +220,7 @@ namespace GloboTicket.Promotion.Migrations
 
                     b.HasKey("VenueLocationId");
 
-                    b.HasAlternateKey("VenueId", "ModifiedDate");
+                    b.HasIndex("VenueId");
 
                     b.ToTable("VenueLocation");
                 });
@@ -263,7 +265,7 @@ namespace GloboTicket.Promotion.Migrations
 
                     b.HasKey("VenueTimeZoneId");
 
-                    b.HasAlternateKey("VenueId", "ModifiedDate");
+                    b.HasIndex("VenueId");
 
                     b.ToTable("VenueTimeZone");
                 });

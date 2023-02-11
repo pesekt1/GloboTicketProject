@@ -1,23 +1,34 @@
 ﻿using GloboTicket.Promotion.Acts;
 using GloboTicket.Promotion.Contents;
+using GloboTicket.Promotion.Messages.Shows;
 using GloboTicket.Promotion.Shows;
 using GloboTicket.Promotion.Venues;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GloboTicket.Promotion.Data
 {
     public class PromotionContext : DbContext
     {
-        public PromotionContext (DbContextOptions<PromotionContext> options)
+        private readonly Dispatcher dispatcher;
+
+        public PromotionContext(DbContextOptions<PromotionContext> options, Dispatcher dispatcher)
             : base(options)
         {
+            this.dispatcher = dispatcher;
         }
 
         public DbSet<Act> Act { get; set; }
+        public DbSet<ActDescription> ActDescription { get; set; }
         public DbSet<Venue> Venue { get; set; }
+        public DbSet<VenueDescription> VenueDescription { get; set; }
+        public DbSet<VenueLocation> VenueLocation { get; set; }
+        public DbSet<VenueTimeZone> VenueTimeZone { get; set; }
         public DbSet<Show> Show { get; set; }
         public DbSet<Content> Content { get; set; }
 
@@ -35,6 +46,15 @@ namespace GloboTicket.Promotion.Data
             modelBuilder.Entity<Venue>()
                 .HasAlternateKey(venue => new { venue.VenueGuid });
 
+            modelBuilder.Entity<VenueDescription>()
+                .HasAlternateKey(venueDescription => new { venueDescription.VenueId, venueDescription.ModifiedDate });
+
+            modelBuilder.Entity<VenueLocation>()
+                .HasAlternateKey(venueLocation => new { venueLocation.VenueId, venueLocation.ModifiedDate });
+
+            modelBuilder.Entity<VenueTimeZone>()
+                .HasAlternateKey(venueTimeZone => new { venueTimeZone.VenueId, venueTimeZone.ModifiedDate });
+
             modelBuilder.Entity<Show>()
                 .HasAlternateKey(show => new { show.ActId, show.VenueId, show.StartTime });
 
@@ -46,6 +66,23 @@ namespace GloboTicket.Promotion.Data
             modelBuilder.Entity<Content>()
                 .Property(content => content.Binary)
                 .IsRequired();
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entitiesAdded = ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Added)
+                .Select(e => e.Entity)
+                .ToList();
+
+            int result = await base.SaveChangesAsync(cancellationToken);
+
+            if (dispatcher != null)
+            {
+                await dispatcher.DispatchAll(entitiesAdded);
+            }
+
+            return result;
         }
 
         public async Task<Act> GetOrInsertAct(Guid actGuid)
@@ -70,6 +107,8 @@ namespace GloboTicket.Promotion.Data
         {
             var venue = Venue
                 .Include(venue => venue.Descriptions)
+                .Include(venue => venue.Locations)
+                .Include(venue => venue.TimeZones)
                 .Where(venue => venue.VenueGuid == venueGuid)
                 .SingleOrDefault();
             if (venue == null)

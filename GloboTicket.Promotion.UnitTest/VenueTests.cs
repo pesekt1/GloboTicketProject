@@ -108,7 +108,7 @@ namespace GloboTicket.Promotion.UnitTest
         {
             var repository = new PromotionContext(new DbContextOptionsBuilder<PromotionContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options);
+                .Options, null);
 
             venueQueries = new VenueQueries(repository);
             venueCommands = new VenueCommands(repository);

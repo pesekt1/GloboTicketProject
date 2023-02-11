@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GloboTicket.Promotion.Migrations
 {
-    public partial class RemoveVenueGuidDefault : Migration
+    public partial class RemovedVenueGuidDefault : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
