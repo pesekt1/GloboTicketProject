@@ -1,14 +1,12 @@
 # GloboTicket
 
-## Branches - ordered:
-- initial-state
-- venue1
-- venue2
-- venue3
-- venue4
-- venue5
-- acts-and-shows1
+Added 2 microservices:
+- Indexer
+- Emailer
 
-Present state of the database:
+System Architecture:
+![System Architecture1](system-architecture1.png)
+
+Present state of the MSSQL database:
 
 ![Acts And Shows](actsAndShows.png)
