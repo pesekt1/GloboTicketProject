@@ -4,6 +4,8 @@ Added 2 microservices:
 - Indexer
 - Emailer
 
+Both Indexer and Emailer are for now just writing a message on the console.
+
 System Architecture:
 ![System Architecture1](system-architecture1.png)
 
