@@ -20,7 +20,7 @@ namespace GloboTicket.Promotion.Shows
         {
             this.actQueries = actQueries;
             this.venueQueries = venueQueries;
-            this.publishEndpoint = publishEndpoint; 
+            this.publishEndpoint = publishEndpoint;
         }
 
         public async Task Notify(Show show)
