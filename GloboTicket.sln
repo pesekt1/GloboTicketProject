@@ -22,6 +22,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GloboTicket.Promotion.Messa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GloboTicket.Promotion.Messages.UnitTest", "GloboTicket.Promotion.Messages.UnitTest\GloboTicket.Promotion.Messages.UnitTest.csproj", "{4E2BE19A-7DAE-418B-98A3-CCB6AF36364E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{2872532E-40A0-4253-9804-7A38BBDCB87D}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\pull.sh = Scripts\pull.sh
+		Scripts\startelasticsearch.sh = Scripts\startelasticsearch.sh
+		Scripts\startrabbitmq.sh = Scripts\startrabbitmq.sh
+		Scripts\startsql.sh = Scripts\startsql.sh
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GloboTicket.Indexer.UnitTest", "GloboTicket.Indexer.UnitTest\GloboTicket.Indexer.UnitTest.csproj", "{BE7FF863-8533-4F59-985A-EAF26AC2AD32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +62,10 @@ Global
 		{4E2BE19A-7DAE-418B-98A3-CCB6AF36364E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E2BE19A-7DAE-418B-98A3-CCB6AF36364E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E2BE19A-7DAE-418B-98A3-CCB6AF36364E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE7FF863-8533-4F59-985A-EAF26AC2AD32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE7FF863-8533-4F59-985A-EAF26AC2AD32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE7FF863-8533-4F59-985A-EAF26AC2AD32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE7FF863-8533-4F59-985A-EAF26AC2AD32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

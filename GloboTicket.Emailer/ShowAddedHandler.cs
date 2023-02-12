@@ -13,7 +13,7 @@ namespace GloboTicket.Emailer
         public Task Handle(ShowAdded message)
         {
             Console.WriteLine($"Emailing about a show for {message.act.description.title} at {message.venue.description.name}.");
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
     }
 }

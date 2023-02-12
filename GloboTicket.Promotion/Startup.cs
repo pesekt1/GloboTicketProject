@@ -49,6 +49,9 @@ namespace GloboTicket.Promotion
             services.AddScoped<ContentCommands>();
 
             services.AddScoped<INotifier<Show>, ShowNotifier>();
+            services.AddScoped<INotifier<ActDescription>, ActDescriptionNotifier>();
+            services.AddScoped<INotifier<VenueDescription>, VenueDescriptionNotifier>();
+            services.AddScoped<INotifier<VenueLocation>, VenueLocationNotifier>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

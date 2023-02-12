@@ -20,7 +20,7 @@ namespace GloboTicket.Promotion.Shows
         {
             this.actQueries = actQueries;
             this.venueQueries = venueQueries;
-            this.publishEndpoint = publishEndpoint;
+            this.publishEndpoint = publishEndpoint; 
         }
 
         public async Task Notify(Show show)
@@ -48,7 +48,7 @@ namespace GloboTicket.Promotion.Shows
                         city = venue.City,
                         modifiedDate = new DateTime(venue.LastModifiedTicks)
                     },
-                    location = MapVenueLocation(venue),
+                    location = venue.ToVenueLocationRepresentation(),
                     timeZone = new VenueTimeZoneRepresentation
                     {
                         timeZone = venue.TimeZone,
@@ -62,22 +62,6 @@ namespace GloboTicket.Promotion.Shows
             };
 
             await publishEndpoint.Publish(showAdded);
-        }
-
-        private static VenueLocationRepresentation MapVenueLocation(VenueInfo venue)
-        {
-            switch ((venue.Latitude, venue.Longitude))
-            {
-                case (float latitude, float longitude):
-                    return new VenueLocationRepresentation
-                    {
-                        latitude = latitude,
-                        longitude = longitude,
-                        modifiedDate = new DateTime(venue.LocationLastModifiedTicks)
-                    };
-                default:
-                    return null;
-            }
         }
     }
 }

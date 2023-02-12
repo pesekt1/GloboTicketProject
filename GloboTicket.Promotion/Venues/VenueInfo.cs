@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System;
+using GloboTicket.Promotion.Messages.Venues;
 
 namespace GloboTicket.Promotion.Venues
 {
@@ -36,6 +37,22 @@ namespace GloboTicket.Promotion.Venues
                 Longitude = venueLocation?.Longitude,
                 LocationLastModifiedTicks = venueLocation?.ModifiedDate.Ticks ?? 0
             };
+        }
+
+        public VenueLocationRepresentation ToVenueLocationRepresentation()
+        {
+            switch ((Latitude, Longitude))
+            {
+                case (float latitude, float longitude):
+                    return new VenueLocationRepresentation
+                    {
+                        latitude = latitude,
+                        longitude = longitude,
+                        modifiedDate = new DateTime(this.LocationLastModifiedTicks)
+                    };
+                default:
+                    return null;
+            }
         }
     }
 }

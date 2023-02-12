@@ -3,48 +3,21 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <UserSecretsId>7f19dc1e-bba8-4e87-a834-e52c4c5b4e06</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="Pages\Acts\Index.cshtml" />
-    <None Include="Pages\Acts\Remove.cshtml" />
-    <None Include="Pages\Error.cshtml" />
-    <None Include="Pages\Index.cshtml" />
-    <None Include="Pages\Privacy.cshtml" />
-    <None Include="Pages\Shared\_Layout.cshtml" />
-    <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />
-    <None Include="Pages\_ViewImports.cshtml" />
-    <None Include="Pages\_ViewStart.cshtml" />
-    <None Include="Views\Acts\Create.cshtml" />
-    <None Include="Views\Acts\Delete.cshtml" />
-    <None Include="Views\Acts\Details.cshtml" />
-    <None Include="Views\Acts\Edit.cshtml" />
-    <None Include="Views\Acts\Index.cshtml" />
-    <None Include="Views\Home\Index.cshtml" />
-    <None Include="Views\Home\Privacy.cshtml" />
-    <None Include="Views\Shared\Error.cshtml" />
-    <None Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <None Include="Views\Venues\Create.cshtml" />
-    <None Include="Views\Venues\Delete.cshtml" />
-    <None Include="Views\Venues\Details.cshtml" />
-    <None Include="Views\Venues\Edit.cshtml" />
-    <None Include="Views\Venues\Index.cshtml" />
-    <None Include="Views\_ViewImports.cshtml" />
-    <None Include="Views\_ViewStart.cshtml" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MassTransit" Version="7.0.7" />
     <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.0.7" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="7.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
