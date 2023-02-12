@@ -1,5 +1,19 @@
 # GloboTicket
 
+## Branches - ordered:
+- initial-state
+- venue1
+- venue2
+- venue3
+- venue4
+- venue5
+- acts-and-shows1
+- indexer-and-emailer1
+- commutative-messages1
+- commutative-messages2
+
+Present state of the database:
+
 ## System Architecture:
 ![Architecture With Elastic Search](architectureWithElasticSearch.png)
 
