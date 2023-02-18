@@ -1,7 +1,7 @@
 # GloboTicket
 
 ## System Architecture:
-![Architecture With Elastic Search](architectureWithElasticSearch_v2.png)
+![Indexer Emailer2 V4](indexer_emailer2_v4.png)
 
 ## Dependencies - running containers
 Access RabbitMQ: http://localhost:15672/
