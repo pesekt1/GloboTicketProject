@@ -1,7 +1,9 @@
 # GloboTicket
 
 ## System Architecture:
-![Architecture With Elastic Search](architectureWithElasticSearch_v2.png)
+![Indexer Emailer2 V4](indexer_emailer2_v4.png)
+
+Indexer is handling 4 different message types that are published to the Indexer queue.
 
 ## Dependencies - running containers
 Access RabbitMQ: http://localhost:15672/
