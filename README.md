@@ -1,16 +1,17 @@
 # GloboTicket
 
-Added 2 microservices:
+## Added 2 microservices:
 - Indexer
 - Emailer
 
 Both Indexer and Emailer are for now just writing a message on the console.
 
-System Architecture:
-![System Architecture1](system-architecture1_v2.png)
+## System Architecture:
 
-Present state of the MSSQL database:
+Fan out pattern - both Emailer and Indexer are getting the same messages from Promotion.
+![Emailer Indexer1 V5](emailer_indexer1_v5.png)
 
 
+## Present state of the MSSQL database:
 ![E R D Venue Location Time Zone](ERD_venueLocation_TimeZone.png)
 
