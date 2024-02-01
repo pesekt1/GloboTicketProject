@@ -3,7 +3,7 @@
 ## Implement CQRS in the code
 
 - separate commands and queries - create separate files
-- in program.cs - register the queries and commands services
+- in startup.cs - register the queries and commands services
 - PromotionContext - add GetOrInsertVenue method - because it will be used multiple times
 
 ## Database Immutability
