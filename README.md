@@ -3,9 +3,9 @@
 ## Implementing Idempotent POST request
 implementing client-side ID to achieve idempotent POST request.
 
-1. step:
+1. step: (to migrate with existing data, we need to autogenerate a value for the new column)
 - add guid to Venue
-- override OnModelCreating
+- override OnModelCreating (in the PromotionContext)
 - create a migration
 - update the database
 
