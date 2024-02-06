@@ -1,4 +1,14 @@
-#GloboTicket
+#GloboTicket demo
+
+ASP.NET Solution
+
+Dependencies needed:
+- runtime for dotnet 5
+- SDK dotnet 5
+
+(Tested with Visual Studio 2019)
+
+
 Initial state
 
 Using MSSQL:
