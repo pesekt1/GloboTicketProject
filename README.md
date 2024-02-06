@@ -1,5 +1,19 @@
 # GloboTicket
 
+Microservices with ASP.NET
+
+Dependencies:
+
+- runtime for dotnet 5
+- runtime for dotnet 3 (for CustomerService)
+- SDK dotnet 5
+
+(Tested with Visual Studio 2019)
+
+- Apps are made for ASP .NET Core 5.0 - use Visual Studio 2019 with the right runtime installed
+- Customer service needs version 3: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-3.1.32-windows-x86-installer
+- Some apps are connected via nuget packages. The explanation is in the presentation pdfs.
+
 ## Branches - ordered:
 - initial-state
 - venue1
