@@ -30,6 +30,10 @@ namespace GloboTicket.Promotion.Migrations
                     ON v.VenueId = d.VenueId
                     AND d.row = 1
                 ");
+            migrationBuilder.Sql(@"DELETE v
+                                FROM Venue v
+                                JOIN VenueRemoved vr 
+                                ON v.VenueId = vr.VenueId");
         }
     }
 }
