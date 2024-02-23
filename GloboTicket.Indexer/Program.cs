@@ -42,7 +42,7 @@ namespace GloboTicket.Indexer
                 busConfig.ReceiveEndpoint("GloboTicket.Indexer", endpointConfig =>
                 {
                     endpointConfig.UseMessageRetry(r => r.Exponential(
-                        retryLimit: 5,
+                        retryLimit: 1,
                         minInterval: TimeSpan.FromSeconds(5),
                         maxInterval: TimeSpan.FromSeconds(30),
                         intervalDelta: TimeSpan.FromSeconds(5)));

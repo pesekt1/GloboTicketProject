@@ -24,6 +24,7 @@ namespace GloboTicket.Indexer.Handlers
             Console.WriteLine($"Indexing a show for {showAdded.act.description.title} at {showAdded.venue.description.name}.");
             try
             {
+                //throw new InvalidOperationException("Simulated failure");
                 string actGuid = showAdded.act.actGuid.ToString().ToLower();
                 string venueGuid = showAdded.venue.venueGuid.ToString().ToLower();
 
